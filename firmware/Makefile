@@ -150,6 +150,10 @@ fw-shipped-$(CONFIG_TOUCHSCREEN_SYNAPTICS_DSX_E7S_FW_UPDATE) += synaptics/shench
 fw-shipped-$(CONFIG_TOUCHSCREEN_NVT_E7S) += novatek/nt36672_miui_e7s.bin
 fw-shipped-$(CONFIG_TOUCHSCREEN_NVT_E7S) += novatek/hx_nt36672_miui_e7s.bin
 
+fw-shipped-$(CONFIG_TOUCHSCREEN_NVT_F7A) += novatek/tianma_nt36672a_miui_f7a.bin
+fw-shipped-$(CONFIG_TOUCHSCREEN_NVT_F7A) += novatek/shenchao_nt36672a_miui_f7a.bin
+fw-shipped-$(CONFIG_TOUCHSCREEN_SYNAPTICS_TCM_REFLASH) += synaptics/boe_td4320_i2c_F7A.img
+
 fw-shipped-all := $(fw-shipped-y) $(fw-shipped-m) $(fw-shipped-)
 
 quiet_cmd_ihex  = IHEX    $@
