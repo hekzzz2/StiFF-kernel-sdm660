@@ -642,7 +642,6 @@ int fts_gesture_init(struct fts_ts_data *ts_data)
        }
 #endif
 
->>>>>>> 26c54f37d5da... input: focal_ft8719: Implement double_tap node
     fts_gesture_data.mode = ENABLE;
     fts_gesture_data.active = DISABLE;
 
