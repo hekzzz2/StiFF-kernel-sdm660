@@ -1,10 +1,13 @@
 #!/bin/bash
 
-DATE=$(date +"%m%d-%H%M")
+DATE=$(date +"%Y%m%d-%H%M")
+
+N=0
 
 make_build(){
 	print "Make kernel dtb..." green
 	if [ $TOOLCHAIN == clang ]; then
+		export KBUILD_COMPILER_STRING=$(clang/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
 		PATH="$(pwd)/clang/bin:${PATH}"
 		make O=out ARCH=arm64 $1
 		make -j$(nproc --all) O=out \
@@ -26,7 +29,7 @@ make_build(){
 }
 
 make_clean(){
-	rm -rf /out
+	rm -rf out
 }
 
 send_msg(){
@@ -90,7 +93,10 @@ build(){
 
 	export type="${1} ${2} ${3}"
 
-	make_clean
+	if [ $(( $N % 2 )) -eq 0 ]; then
+    		print "Cleaning out ..." green
+		make_clean
+	fi
 
 	if [ $2 == "-oldcam" ]
 	then
@@ -99,4 +105,6 @@ build(){
 		make_build "deagle_${1}_newcam_defconfig"
 	fi
 		mkzip "$KERNELNAME-$LOCALVERSION-${1}${2}${3}-$DATE.zip"
+
+	N=$( expr $N + 1)
 }
